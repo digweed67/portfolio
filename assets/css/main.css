@@ -754,6 +754,9 @@ section,
   transform: scale(1.1);
 }
 
+.modal-header-custom {
+  background-color: #0563bb;
+}
 
 /*--------------------------------------------------------------
 # Contact Section
