@@ -261,61 +261,102 @@
     <p>Here are a couple of projects I'm most proud of, reflecting my progress and creativity as a developer.</p>
   </div><!-- End Section Title -->
 
-  <div class="container">
-    <div class="row g-4" data-aos="fade-up" data-aos-delay="200">
+<div class="container">
+  <div class="row g-4">
 
-        <div class="col-12 col-md-6 portfolio-item">
-          <img src="assets/img/portfolio/project1.jpg" class="img-fluid d-block mx-auto" alt="Project 1">
-          <div class="portfolio-info">
-            <h4>Gazetteer Web App</h4>
-            <a href="#project1Modal" data-bs-toggle="modal" class="details-link"><i class="bi bi-link-45deg"></i></a>
-          </div>
-        </div><!-- End Portfolio Item -->
-
-        <div class="col-12 col-md-6 portfolio-item">
-          <img src="assets/img/portfolio/project2.jpg" class="img-fluid d-block mx-auto" alt="Project 2">
-          <div class="portfolio-info">
-            <h4>Company Directory</h4>
-            <a href="#project2Modal" data-bs-toggle="modal" class="details-link"><i class="bi bi-link-45deg"></i></a>
-          </div>
-        </div><!-- End Portfolio Item -->
-
-      </div><!-- End Portfolio Container -->
-    </div>
-  </div>
-
-  <!-- Modals for Project Details -->
-  <div class="modal fade" id="project1Modal" tabindex="-1" aria-labelledby="project1ModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="project1ModalLabel">Gazetteer Web App</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>This project integrates Leaflet, jQuery, PHP, and multiple APIs to provide detailed country-level data with a fully interactive UI.</p>
-          <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript, Leaflet, jQuery, Bootstrap, PHP, MySQL, AJAX</p>
-          <a href="https://github.com/amaiaartola/gazetteer" target="_blank">View on GitHub</a>
+    <!-- Gazetteer Web App -->
+    <div class="col-12 col-md-6 text-center">
+      <div class="image-wrapper position-relative">
+        <img src="assets/img/portfolio/project1.jpg" alt="Gazetteer Web App" class="img-fluid project-image">
+        <div class="overlay">
+          <h4>Gazetteer Web App</h4>
+          <i class="bi bi-plus-circle-fill"
+             data-bs-toggle="modal"
+             data-bs-target="#project1Modal"
+             title="Open Modal"></i>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal fade" id="project2Modal" tabindex="-1" aria-labelledby="project2ModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="project2ModalLabel">Company Directory</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>A CRUD-based internal directory system using PHP and MySQL with a Bootstrap interface and real-time UI updates via AJAX.</p>
-          <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript, Bootstrap, PHP, MySQLi, AJAX</p>
-          <a href="https://github.com/amaiaartola/company-directory" target="_blank">View on GitHub</a>
+    <!-- Company Directory -->
+    <div class="col-12 col-md-6 text-center">
+      <div class="image-wrapper position-relative">
+        <img src="assets/img/portfolio/project2.jpg" alt="Company Directory" class="img-fluid project-image">
+        <div class="overlay">
+          <h4>Company Directory</h4>
+          <i class="bi bi-plus-circle-fill"
+             data-bs-toggle="modal"
+             data-bs-target="#project2Modal"
+             title="Open Modal"></i>
         </div>
       </div>
     </div>
+
   </div>
+</div>
+
+
+  <!-- Modal: Gazetteer Web App -->
+<div class="modal fade" id="project1Modal" tabindex="-1" aria-labelledby="project1ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content shadow rounded">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="project1ModalLabel">Gazetteer Web App</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-4">
+          The Gazetteer is a full-featured country explorer built with Leaflet and multiple APIs. It includes interactive maps, real-time weather, Wikipedia summaries, currency info, and Points of Interest — all delivered in a clean, responsive interface.
+        </p>
+
+        <h6 class="text-uppercase fw-bold">Tech Stack</h6>
+        <ul class="row list-unstyled mb-4">
+          <li class="col-6 mb-1"><i class="bi bi-check2 me-1 text-primary"></i>HTML & CSS</li>
+          <li class="col-6 mb-1"><i class="bi bi-check2 me-1 text-primary"></i>JavaScript</li>
+          <li class="col-6 mb-1"><i class="bi bi-check2 me-1 text-primary"></i>Leaflet.js</li>
+          <li class="col-6 mb-1"><i class="bi bi-check2 me-1 text-primary"></i>jQuery & AJAX</li>
+          <li class="col-6 mb-1"><i class="bi bi-check2 me-1 text-primary"></i>PHP</li>
+          <li class="col-6 mb-1"><i class="bi bi-check2 me-1 text-primary"></i>MySQL</li>
+        </ul>
+
+        <a href="https://github.com/amaiaartola/gazetteer" target="_blank" class="btn btn-dark d-inline-flex align-items-center">
+          <i class="bi bi-github me-2"></i> View on GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Company Directory -->
+<div class="modal fade" id="project2Modal" tabindex="-1" aria-labelledby="project2ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content shadow rounded">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="project2ModalLabel">Company Directory</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-4">
+          A responsive internal tool that allows users to manage personnel, departments, and locations with full CRUD capabilities. Built with PHP and MySQL, it features real-time updates, filtering, and modals for editing — all styled with Bootstrap.
+        </p>
+
+        <h6 class="text-uppercase fw-bold">Tech Stack</h6>
+        <ul class="row list-unstyled mb-4">
+          <li class="col-6 mb-1"><i class="bi bi-check2 me-1 text-primary"></i>HTML & CSS</li>
+          <li class="col-6 mb-1"><i class="bi bi-check2 me-1 text-primary"></i>JavaScript</li>
+          <li class="col-6 mb-1"><i class="bi bi-check2 me-1 text-primary"></i>Bootstrap</li>
+          <li class="col-6 mb-1"><i class="bi bi-check2 me-1 text-primary"></i>AJAX</li>
+          <li class="col-6 mb-1"><i class="bi bi-check2 me-1 text-primary"></i>PHP</li>
+          <li class="col-6 mb-1"><i class="bi bi-check2 me-1 text-primary"></i>MySQLi</li>
+        </ul>
+
+        <a href="https://github.com/amaiaartola/company-directory" target="_blank" class="btn btn-dark d-inline-flex align-items-center">
+          <i class="bi bi-github me-2"></i> View on GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
     </section><!-- /Portfolio Section --> 
 
