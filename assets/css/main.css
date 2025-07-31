@@ -736,8 +736,12 @@ section,
 
 .overlay h4 {
   color: white;
+  font-size: 1rem;
+  font-weight: 500;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
+
 
 .overlay i {
   color: white;
@@ -749,7 +753,6 @@ section,
 .overlay i:hover {
   transform: scale(1.1);
 }
-
 
 
 /*--------------------------------------------------------------
