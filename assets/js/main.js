@@ -226,4 +226,41 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+ 
+document.addEventListener('DOMContentLoaded', function () {
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  // 1. Tap to activate overlay
+  if (isTouchDevice) {
+    document.querySelectorAll('.overlay').forEach(overlay => {
+      overlay.addEventListener('click', function (e) {
+        e.stopPropagation(); // stop bubbling
+        // Close all overlays first
+        document.querySelectorAll('.overlay.active').forEach(o => o.classList.remove('active'));
+        // Activate the tapped one
+        this.classList.add('active');
+      });
+    });
+
+    // 2. Tap outside any image = remove all overlays
+    document.addEventListener('click', function () {
+      document.querySelectorAll('.overlay.active').forEach(o => o.classList.remove('active'));
+    });
+  }
+
+  // 3. Modal closes = clear overlays
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('hidden.bs.modal', function () {
+      document.querySelectorAll('.overlay.active').forEach(o => o.classList.remove('active'));
+    });
+  });
+});
+
+// Fix ARIA issue: blur focused elements before modal is hidden
+$('.modal').on('hide.bs.modal', function () {
+  if (document.activeElement && this.contains(document.activeElement)) {
+    document.activeElement.blur();
+  }
+});
+
 })();

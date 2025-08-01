@@ -758,6 +758,12 @@ section,
   background-color: #0563bb;
 }
 
+#portfolio .container {
+  max-width: 900px;
+  margin: auto;
+}
+
+
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/

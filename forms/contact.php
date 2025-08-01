@@ -1,41 +1,48 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
+// Include PHPMailer classes
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+require 'PHPMailer/Exception.php';
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+header('Content-Type: application/json');
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $name    = $_POST['name'] ?? '';
+    $email   = $_POST['email'] ?? '';
+    $subject = $_POST['subject'] ?? 'New message from contact form';
+    $message = $_POST['message'] ?? '';
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
+    $mail = new PHPMailer(true);
 
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'amaia.artola@gmail.com';        // ← Your Gmail address
+        $mail->Password   = 'your_app_password';           // ← Your 16-character Gmail App Password
+        $mail->SMTPSecure = 'tls';
+        $mail->Port       = 587;
 
-  echo $contact->send();
+        // Recipients
+        $mail->setFrom($email, $name);
+        $mail->addAddress('amaia.artola@gmail.com');         // ← Your email again
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body    = nl2br($message);
+
+        $mail->send();
+
+        echo json_encode(['status' => 'success', 'message' => 'Message sent successfully']);
+    } catch (Exception $e) {
+        echo json_encode(['status' => 'error', 'message' => "Mailer Error: {$mail->ErrorInfo}"]);
+    }
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request']);
+}
 ?>
