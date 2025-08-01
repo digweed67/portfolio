@@ -1,0 +1,8 @@
+# Prevent config file with email credentials from being committed
+/forms/config.php
+
+
+# System files
+.DS_Store
+Thumbs.db
+
