@@ -763,45 +763,22 @@ section,
   margin: auto;
 }
 
+.btn-custom {
+  background-color: #0563bb; /* match modal-header-custom background */
+  color: #fff;
+  border: none;
+}
+
+.btn-custom:hover {
+  background-color: #093f92; /* darker on hover */
+  color: #fff;
+}
+
 
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/
-.contact .info-item+.info-item {
-  margin-top: 40px;
-}
 
-.contact .info-item i {
-  color: var(--accent-color);
-  background: color-mix(in srgb, var(--accent-color), transparent 92%);
-  font-size: 20px;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50px;
-  transition: all 0.3s ease-in-out;
-  margin-right: 15px;
-}
-
-.contact .info-item h3 {
-  padding: 0;
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-.contact .info-item p {
-  padding: 0;
-  margin-bottom: 0;
-  font-size: 14px;
-}
-
-.contact .info-item:hover i {
-  background: var(--accent-color);
-  color: var(--contrast-color);
-}
 
 .contact .php-email-form {
   height: 100%;
