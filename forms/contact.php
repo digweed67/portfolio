@@ -6,6 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
 require 'PHPMailer/Exception.php';
+require 'config.php';
 
 header('Content-Type: application/json');
 
@@ -22,14 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'amaia.artola@gmail.com';        // ← Your Gmail address
-        $mail->Password   = 'your_app_password';           // ← Your 16-character Gmail App Password
+        $mail->Username   = EMAIL_USERNAME;
+        $mail->Password   = EMAIL_PASSWORD;
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
 
         // Recipients
-        $mail->setFrom($email, $name);
-        $mail->addAddress('amaia.artola@gmail.com');         // ← Your email again
+        $mail->setFrom(EMAIL_FROM, $name);
+        $mail->addReplyTo($email);
+        $mail->addAddress(EMAIL_TO);
 
         // Content
         $mail->isHTML(true);

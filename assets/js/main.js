@@ -226,6 +226,57 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+  function setupContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  const loading = form.querySelector('.loading');
+  const errorMessage = form.querySelector('.error-message');
+  const sentMessage = form.querySelector('.sent-message');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    loading.style.display = 'block';
+    errorMessage.style.display = 'none';
+    sentMessage.style.display = 'none';
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => {
+        loading.style.display = 'none';
+        if (data.status === 'success') {
+          sentMessage.style.display = 'block';
+          form.reset();
+
+          setTimeout(() => {
+            sentMessage.style.display = 'none';
+          }, 5000);
+
+        } else {
+          errorMessage.innerHTML = data.message;
+          errorMessage.style.display = 'block';
+          setTimeout(() => {
+            errorMessage.style.display = 'none';
+          }, 5000);
+        }
+      })
+      .catch(error => {
+        loading.style.display = 'none';
+        errorMessage.innerHTML = 'An unexpected error occurred.';
+        errorMessage.style.display = 'block';
+        setTimeout(() => {
+          errorMessage.style.display = 'none';
+        }, 5000);
+      });
+  });
+}
+
  
 document.addEventListener('DOMContentLoaded', function () {
   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -255,6 +306,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+
+setupContactForm();
 
 // Fix ARIA issue: blur focused elements before modal is hidden
 $('.modal').on('hide.bs.modal', function () {
