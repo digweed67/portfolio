@@ -1,10 +1,4 @@
 
-/**
- * Amaia Artola – Cleaned main.js (trimmed from template)
- * What’s kept: header toggle, hide-on-nav click, preloader, scroll-top,
- * AOS init, typed.js, hash scroll fix, nav scrollspy, contact form,
- * touch overlay support, ARIA fix for Bootstrap modals.
- */
 
 (function () {
   "use strict";
@@ -183,6 +177,19 @@
       });
     });
   });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('a[data-close-modal="true"]').forEach((a) => {
+      a.addEventListener("click", function () {
+        const modalEl = this.closest(".modal");
+        if (!modalEl || !window.bootstrap) return;
+        const instance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+        // Give the browser a moment to open the link, then hide the modal
+        setTimeout(() => instance.hide(), 150);
+      });
+    });
+  });
+
 
   /* =====================
      ARIA focus fix when hiding modals (jQuery + Bootstrap)
