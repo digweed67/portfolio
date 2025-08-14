@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore countries, cities and country information in an interactive world map.">
+  <title>Gazetteer</title>
+
+  <!-- CSS -->
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="lib/markercluster/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="lib/extramarkers/css/leaflet.extra-markers.min.css" />
+  <link rel="stylesheet" href="lib/easybutton/easy-button.css" />
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/favicon.png">
+
+
+</head>
+
+<body class="m-0 p-0 h-100 overflow-hidden">
+  <!-- Loader Spinner -->
+<div id="loader"
+     class="position-fixed top-0 start-0 w-100 vh-100         
+            d-flex justify-content-center align-items-center  
+            bg-white text-dark fs-1                         
+            z-3">                                           
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading map...</span>
+  </div>
+</div>
+
+
+ <!-- Country Dropdown -->
+ <div class="position-fixed top-0 start-50 translate-middle-x mt-3 z-3">
+  <select id="countryDropdown" class="form-select shadow border-primary" style="width: 220px;">
+    <option value="">Select a country</option>
+  </select>
+</div>
+
+<!-- Map -->
+<div id="map" class="position-absolute top-0 start-0 w-100 h-100 z-1"></div>
+
+<!-- Demographics Modal -->
+<div class="modal fade" id="demographicsModal" tabindex="-1" aria-labelledby="demographicsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content rounded shadow p-2">
+      <div class="modal-header bg-primary bg-gradient text-white rounded-top">
+        <h5 class="modal-title fw-bold fs-5" id="demographicsModalLabel">
+          Demographic Information
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-1 p-sm-4" id="demographicsModalBody">
+        Loading demographics...
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Wikipedia Modal -->
+<div class="modal fade" id="wikipediaModal" tabindex="-1" aria-labelledby="wikipediaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content rounded shadow p-2">
+      <div class="modal-header bg-primary bg-gradient text-white rounded-top">
+        <h5 class="modal-title fw-bold fs-5" id="wikipediaModalLabel">
+          Country Summary
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-2 p-sm-4" id="wikipediaModalBody">
+        <p><em>Loading...</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Weather Modal -->
+<div class="modal fade" id="weatherModal" tabindex="-1" aria-labelledby="weatherModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content rounded shadow p-2">
+      <div class="modal-header bg-primary bg-gradient text-white rounded-top">
+        <h5 class="modal-title fw-bold fs-5" id="weatherModalLabel">Weather</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-2 p-sm-4" id="weatherModalBody">
+        <p><em>Loading weather data...</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <!-- Images Modal -->
+<div class="modal fade" id="imagesModal" tabindex="-1" aria-labelledby="imagesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content rounded shadow p-2">
+      <div class="modal-header bg-primary bg-gradient text-white rounded-top">
+        <h5 class="modal-title fw-bold fs-5" id="imagesModalLabel">Country Photos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-2 p-sm-4" id="imagesModalBody">
+        <p><em>Loading images...</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Holidays Modal -->
+<div class="modal fade" id="holidaysModal" tabindex="-1" aria-labelledby="holidaysModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content rounded shadow p-2">
+      <div class="modal-header bg-primary bg-gradient text-white rounded-top">
+        <h5 class="modal-title fw-bold fs-5" id="holidaysModalLabel">Holidays</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-2 p-sm-4">
+        <ul id="holidaysList" class="list-group">
+          <li class="list-group-item"><em>Loading holidays…</em></li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- JS -->
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="lib/leaflet/leaflet.js"></script>
+  <script src="lib/markercluster/leaflet.markercluster.js"></script>
+  <script src="lib/extramarkers/js/leaflet.extra-markers.min.js"></script>
+  <script src="lib/easybutton/easy-button.js"></script>
+  <script src="js/date.js"></script>
+  <script src="js/script.js"></script>
+
+
+</body>
+
+</html>
