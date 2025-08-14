@@ -34,7 +34,7 @@ A single-page portfolio to showcase projects, skills, and experience. Built with
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```
 .
