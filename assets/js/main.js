@@ -1,320 +1,204 @@
-/**
-* Template Name: MyResume
-* Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-* Updated: Jun 29 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 
-(function() {
+
+(function () {
   "use strict";
 
-  /**
-   * Header toggle
-   */
-  const headerToggleBtn = document.querySelector('.header-toggle');
-
+  /* =====================
+     Header toggle
+  ===================== */
+  const headerToggleBtn = document.querySelector(".header-toggle");
   function headerToggle() {
-    document.querySelector('#header').classList.toggle('header-show');
-    headerToggleBtn.classList.toggle('bi-list');
-    headerToggleBtn.classList.toggle('bi-x');
+    const header = document.querySelector("#header");
+    if (!header || !headerToggleBtn) return;
+    header.classList.toggle("header-show");
+    headerToggleBtn.classList.toggle("bi-list");
+    headerToggleBtn.classList.toggle("bi-x");
   }
-  headerToggleBtn.addEventListener('click', headerToggle);
+  if (headerToggleBtn) headerToggleBtn.addEventListener("click", headerToggle);
 
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
-  document.querySelectorAll('#navmenu a').forEach(navmenu => {
-    navmenu.addEventListener('click', () => {
-      if (document.querySelector('.header-show')) {
-        headerToggle();
-      }
-    });
-
-  });
-
-  /**
-   * Toggle mobile nav dropdowns
-   */
-  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function(e) {
-      e.preventDefault();
-      this.parentNode.classList.toggle('active');
-      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
-      e.stopImmediatePropagation();
+  /* Hide mobile nav on same-page/hash links */
+  document.querySelectorAll("#navmenu a").forEach((link) => {
+    link.addEventListener("click", () => {
+      if (document.querySelector(".header-show")) headerToggle();
     });
   });
 
-  /**
-   * Preloader
-   */
-  const preloader = document.querySelector('#preloader');
+  /* =====================
+     Preloader
+  ===================== */
+  const preloader = document.querySelector("#preloader");
   if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove();
-    });
+    window.addEventListener("load", () => preloader.remove());
   }
 
-  /**
-   * Scroll top button
-   */
-  let scrollTop = document.querySelector('.scroll-top');
-
+  /* =====================
+     Scroll Top button
+  ===================== */
+  const scrollTop = document.querySelector(".scroll-top");
   function toggleScrollTop() {
-    if (scrollTop) {
-      window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+    if (!scrollTop) return;
+    if (window.scrollY > 100) scrollTop.classList.add("active");
+    else scrollTop.classList.remove("active");
+  }
+  if (scrollTop) {
+    scrollTop.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+  window.addEventListener("load", toggleScrollTop);
+  document.addEventListener("scroll", toggleScrollTop);
+
+  /* =====================
+     AOS init
+  ===================== */
+  function aosInit() {
+    if (window.AOS && typeof AOS.init === "function") {
+      AOS.init({ duration: 600, easing: "ease-in-out", once: true, mirror: false });
     }
   }
-  scrollTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
+  window.addEventListener("load", aosInit);
 
-  window.addEventListener('load', toggleScrollTop);
-  document.addEventListener('scroll', toggleScrollTop);
-
-  /**
-   * Animation on scroll function and init
-   */
-  function aosInit() {
-    AOS.init({
-      duration: 600,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    });
-  }
-  window.addEventListener('load', aosInit);
-
-  /**
-   * Init typed.js
-   */
-  const selectTyped = document.querySelector('.typed');
-  if (selectTyped) {
-    let typed_strings = selectTyped.getAttribute('data-typed-items');
-    typed_strings = typed_strings.split(',');
-    new Typed('.typed', {
-      strings: typed_strings,
+  /* =====================
+     typed.js init
+  ===================== */
+  (function initTyped() {
+    const el = document.querySelector(".typed");
+    if (!el || !window.Typed) return;
+    let items = el.getAttribute("data-typed-items");
+    if (!items) return;
+    items = items.split(",");
+    new Typed(".typed", {
+      strings: items,
       loop: true,
       typeSpeed: 100,
       backSpeed: 50,
-      backDelay: 2000
+      backDelay: 2000,
     });
-  }
+  })();
 
-  /**
-   * Initiate Pure Counter
-   */
-  new PureCounter();
-
-  /**
-   * Animate the skills items on reveal
-   */
-  let skillsAnimation = document.querySelectorAll('.skills-animation');
-  skillsAnimation.forEach((item) => {
-    new Waypoint({
-      element: item,
-      offset: '80%',
-      handler: function(direction) {
-        let progress = item.querySelectorAll('.progress .progress-bar');
-        progress.forEach(el => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%';
-        });
-      }
-    });
+  /* =====================
+     Correct hash scroll on load
+  ===================== */
+  window.addEventListener("load", () => {
+    if (!window.location.hash) return;
+    const section = document.querySelector(window.location.hash);
+    if (!section) return;
+    setTimeout(() => {
+      const scrollMarginTop = parseInt(getComputedStyle(section).scrollMarginTop || "0", 10);
+      window.scrollTo({ top: section.offsetTop - scrollMarginTop, behavior: "smooth" });
+    }, 100);
   });
 
-  /**
-   * Initiate glightbox
-   */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
-
-  /**
-   * Init isotope layout and filters
-   */
-  document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
-    let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
-    let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
-    let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
-
-    let initIsotope;
-    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
-      initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
-        itemSelector: '.isotope-item',
-        layoutMode: layout,
-        filter: filter,
-        sortBy: sort
-      });
-    });
-
-    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
-      filters.addEventListener('click', function() {
-        isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
-        this.classList.add('filter-active');
-        initIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        if (typeof aosInit === 'function') {
-          aosInit();
-        }
-      }, false);
-    });
-
-  });
-
-  /**
-   * Init swiper sliders
-   */
-  function initSwiper() {
-    document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
-      let config = JSON.parse(
-        swiperElement.querySelector(".swiper-config").innerHTML.trim()
-      );
-
-      if (swiperElement.classList.contains("swiper-tab")) {
-        initSwiperWithCustomPagination(swiperElement, config);
-      } else {
-        new Swiper(swiperElement, config);
-      }
-    });
-  }
-
-  window.addEventListener("load", initSwiper);
-
-  /**
-   * Correct scrolling position upon page load for URLs containing hash links.
-   */
-  window.addEventListener('load', function(e) {
-    if (window.location.hash) {
-      if (document.querySelector(window.location.hash)) {
-        setTimeout(() => {
-          let section = document.querySelector(window.location.hash);
-          let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
-          window.scrollTo({
-            top: section.offsetTop - parseInt(scrollMarginTop),
-            behavior: 'smooth'
-          });
-        }, 100);
-      }
-    }
-  });
-
-  /**
-   * Navmenu Scrollspy
-   */
-  let navmenulinks = document.querySelectorAll('.navmenu a');
-
+  /* =====================
+     Navmenu Scrollspy
+  ===================== */
+  const navmenulinks = document.querySelectorAll(".navmenu a");
   function navmenuScrollspy() {
-    navmenulinks.forEach(navmenulink => {
-      if (!navmenulink.hash) return;
-      let section = document.querySelector(navmenulink.hash);
+    const pos = window.scrollY + 200;
+    navmenulinks.forEach((link) => {
+      if (!link.hash) return;
+      const section = document.querySelector(link.hash);
       if (!section) return;
-      let position = window.scrollY + 200;
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
-        navmenulink.classList.add('active');
-      } else {
-        navmenulink.classList.remove('active');
-      }
-    })
+      const inView = pos >= section.offsetTop && pos <= section.offsetTop + section.offsetHeight;
+      link.classList.toggle("active", inView);
+    });
   }
-  window.addEventListener('load', navmenuScrollspy);
-  document.addEventListener('scroll', navmenuScrollspy);
+  window.addEventListener("load", navmenuScrollspy);
+  document.addEventListener("scroll", navmenuScrollspy);
 
+  /* =====================
+     Contact form (AJAX -> JSON)
+  ===================== */
   function setupContactForm() {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
+    const form = document.getElementById("contactForm");
+    if (!form) return;
 
-  const loading = form.querySelector('.loading');
-  const errorMessage = form.querySelector('.error-message');
-  const sentMessage = form.querySelector('.sent-message');
+    const loading = form.querySelector(".loading");
+    const errorMessage = form.querySelector(".error-message");
+    const sentMessage = form.querySelector(".sent-message");
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (loading) loading.style.display = "block";
+      if (errorMessage) errorMessage.style.display = "none";
+      if (sentMessage) sentMessage.style.display = "none";
 
-    loading.style.display = 'block';
-    errorMessage.style.display = 'none';
-    sentMessage.style.display = 'none';
+      const formData = new FormData(form);
 
-    const formData = new FormData(form);
-
-    fetch(form.action, {
-      method: 'POST',
-      body: formData
-    })
-      .then(response => response.json())
-      .then(data => {
-        loading.style.display = 'none';
-        if (data.status === 'success') {
-          sentMessage.style.display = 'block';
-          form.reset();
-
-          setTimeout(() => {
-            sentMessage.style.display = 'none';
-          }, 5000);
-
-        } else {
-          errorMessage.innerHTML = data.message;
-          errorMessage.style.display = 'block';
-          setTimeout(() => {
-            errorMessage.style.display = 'none';
-          }, 5000);
-        }
-      })
-      .catch(error => {
-        loading.style.display = 'none';
-        errorMessage.innerHTML = 'An unexpected error occurred.';
-        errorMessage.style.display = 'block';
-        setTimeout(() => {
-          errorMessage.style.display = 'none';
-        }, 5000);
-      });
-  });
-}
-
- 
-document.addEventListener('DOMContentLoaded', function () {
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-  // 1. Tap to activate overlay
-  if (isTouchDevice) {
-    document.querySelectorAll('.overlay').forEach(overlay => {
-      overlay.addEventListener('click', function (e) {
-        e.stopPropagation(); // stop bubbling
-        // Close all overlays first
-        document.querySelectorAll('.overlay.active').forEach(o => o.classList.remove('active'));
-        // Activate the tapped one
-        this.classList.add('active');
-      });
-    });
-
-    // 2. Tap outside any image = remove all overlays
-    document.addEventListener('click', function () {
-      document.querySelectorAll('.overlay.active').forEach(o => o.classList.remove('active'));
+      fetch(form.action, { method: "POST", body: formData })
+        .then((r) => r.json())
+        .then((data) => {
+          if (loading) loading.style.display = "none";
+          if (data.status === "success") {
+            if (sentMessage) sentMessage.style.display = "block";
+            form.reset();
+            setTimeout(() => { if (sentMessage) sentMessage.style.display = "none"; }, 5000);
+          } else {
+            if (errorMessage) errorMessage.innerHTML = data.message || "Submission failed.";
+            if (errorMessage) errorMessage.style.display = "block";
+            setTimeout(() => { if (errorMessage) errorMessage.style.display = "none"; }, 5000);
+          }
+        })
+        .catch(() => {
+          if (loading) loading.style.display = "none";
+          if (errorMessage) errorMessage.innerHTML = "An unexpected error occurred.";
+          if (errorMessage) errorMessage.style.display = "block";
+          setTimeout(() => { if (errorMessage) errorMessage.style.display = "none"; }, 5000);
+        });
     });
   }
+  setupContactForm();
 
-  // 3. Modal closes = clear overlays
-  document.querySelectorAll('.modal').forEach(modal => {
-    modal.addEventListener('hidden.bs.modal', function () {
-      document.querySelectorAll('.overlay.active').forEach(o => o.classList.remove('active'));
+  /* =====================
+     Touch support for portfolio overlays
+  ===================== */
+  document.addEventListener("DOMContentLoaded", function () {
+    const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+    if (isTouch) {
+      document.querySelectorAll(".overlay").forEach((overlay) => {
+        overlay.addEventListener("click", function (e) {
+          e.stopPropagation();
+          document.querySelectorAll(".overlay.active").forEach((o) => o.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+
+      document.addEventListener("click", function () {
+        document.querySelectorAll(".overlay.active").forEach((o) => o.classList.remove("active"));
+      });
+    }
+
+    // Clear overlays when any Bootstrap modal is closed
+    document.querySelectorAll(".modal").forEach((modal) => {
+      modal.addEventListener("hidden.bs.modal", function () {
+        document.querySelectorAll(".overlay.active").forEach((o) => o.classList.remove("active"));
+      });
     });
   });
-});
+
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('a[data-close-modal="true"]').forEach((a) => {
+      a.addEventListener("click", function () {
+        const modalEl = this.closest(".modal");
+        if (!modalEl || !window.bootstrap) return;
+        const instance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+        // Give the browser a moment to open the link, then hide the modal
+        setTimeout(() => instance.hide(), 150);
+      });
+    });
+  });
 
 
-setupContactForm();
-
-// Fix ARIA issue: blur focused elements before modal is hidden
-$('.modal').on('hide.bs.modal', function () {
-  if (document.activeElement && this.contains(document.activeElement)) {
-    document.activeElement.blur();
+  /* =====================
+     ARIA focus fix when hiding modals (jQuery + Bootstrap)
+  ===================== */
+  if (window.jQuery) {
+    jQuery(".modal").on("hide.bs.modal", function () {
+      if (document.activeElement && this.contains(document.activeElement)) {
+        document.activeElement.blur();
+      }
+    });
   }
-});
-
 })();

@@ -1,43 +1,29 @@
-/**
-* Template Name: MyResume
-* Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-* Updated: Jun 29 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 
-/*--------------------------------------------------------------
-# Font & Color Variables
-# Help: https://bootstrapmade.com/color-system/
---------------------------------------------------------------*/
-/* Fonts */
+/* =====================
+   Variables & Base
+===================== */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Raleway",  sans-serif;
-  --nav-font: "Poppins",  sans-serif;
-}
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Raleway", sans-serif;
+  --nav-font: "Poppins", sans-serif;
 
-/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
-  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #272829; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #45505b; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #0563bb; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
-}
+  --background-color: #ffffff;
+  --default-color: #272829;
+  --heading-color: #45505b;
+  --accent-color: #0563bb;
+  --surface-color: #ffffff;
+  --contrast-color: #ffffff;
 
-/* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
-:root {
-  --nav-color: #45505b;  /* The default color of the main navmenu links */
-  --nav-hover-color: #0563bb; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #212529; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #0563bb; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
-}
+  /* Nav */
+  --nav-color: #45505b;
+  --nav-hover-color: #0563bb;
+  --nav-mobile-background-color: #ffffff;
+  --nav-dropdown-background-color: #ffffff;
+  --nav-dropdown-color: #212529;
+  --nav-dropdown-hover-color: #0563bb;
 
-/* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
+  scroll-behavior: smooth;
+}
 
 .light-background {
   --background-color: #f9f9f9;
@@ -52,14 +38,6 @@
   --contrast-color: #ffffff;
 }
 
-/* Smooth scroll */
-:root {
-  scroll-behavior: smooth;
-}
-
-/*--------------------------------------------------------------
-# General Styling & Shared Classes
---------------------------------------------------------------*/
 body {
   color: var(--default-color);
   background-color: var(--background-color);
@@ -71,90 +49,22 @@ a {
   text-decoration: none;
   transition: 0.3s;
 }
+a:hover { color: color-mix(in srgb, var(--accent-color), transparent 25%); }
 
-a:hover {
-  color: color-mix(in srgb, var(--accent-color), transparent 25%);
-  text-decoration: none;
-}
+h1,h2,h3,h4,h5,h6 { color: var(--heading-color); font-family: var(--heading-font); }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--heading-color);
-  font-family: var(--heading-font);
-}
-
-/* PHP Email Form Messages
-------------------------------*/
-.php-email-form .error-message {
-  display: none;
-  background: #df1529;
-  color: #ffffff;
-  text-align: left;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.php-email-form .sent-message {
-  display: none;
-  color: #ffffff;
-  background: #059652;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.php-email-form .loading {
-  display: none;
-  background: var(--surface-color);
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-}
-
-.php-email-form .loading:before {
-  content: "";
-  display: inline-block;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid var(--accent-color);
-  border-top-color: var(--surface-color);
-  animation: php-email-form-loading 1s linear infinite;
-}
-
-@keyframes php-email-form-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/*--------------------------------------------------------------
-# Global Header
---------------------------------------------------------------*/
+/* =====================
+   Header & Nav
+===================== */
 .header {
   color: var(--default-color);
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
+  position: fixed; top: 0; left: 0; bottom: 0;
   padding: 0 15px;
-  transition: all ease-in-out 0.3s;
+  transition: all .3s ease-in-out;
   overflow-y: auto;
   z-index: 997;
   min-width: 200px;
 }
-
 @media (max-width: 1199px) {
   .header {
     background-color: var(--background-color);
@@ -163,100 +73,40 @@ h6 {
     left: -100%;
   }
 }
-
 @media (min-width: 1200px) and (max-width: 1600px) {
-  .header~main {
-    margin-left: 160px;
-  }
-
-  .header~main .hero {
-    margin-left: -160px;
-    width: 100vw;
-  }
+  .header~main { margin-left: 160px; }
+  .header~main .hero { margin-left: -160px; width: 100vw; }
 }
-
-.header.header-show {
-  left: 0;
-}
+.header.header-show { left: 0; }
 
 .header .header-toggle {
   color: var(--contrast-color);
   background-color: var(--accent-color);
   font-size: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 9999;
-  transition: background-color 0.3s;
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  cursor: pointer; position: fixed; top: 15px; right: 15px;
+  z-index: 9999; transition: background-color 0.3s;
 }
+.header .header-toggle:hover { background-color: color-mix(in srgb, var(--accent-color) 90%, white 15%); }
 
-.header .header-toggle:hover {
-  color: var(--contrast-color);
-  background-color: color-mix(in srgb, var(--accent-color) 90%, white 15%);
-}
-
-/*--------------------------------------------------------------
-# Navigation Menu
---------------------------------------------------------------*/
-.navmenu {
-  padding: 0;
-  z-index: 9997;
-}
-
-.navmenu ul {
-  list-style: none;
-  padding: 0 0 20px 0;
-  margin: 0;
-  width: 140px;
-}
-
-.navmenu a,
-.navmenu a:focus {
+.navmenu { padding: 0; z-index: 9997; }
+.navmenu ul { list-style: none; padding: 0 0 20px 0; margin: 0; width: 140px; }
+.navmenu a, .navmenu a:focus {
   color: var(--nav-color);
   font-family: var(--nav-font);
-  display: flex;
-  align-items: center;
-  padding: 10px 18px;
-  margin-bottom: 8px;
-  font-size: 15px;
+  display: flex; align-items: center;
+  padding: 10px 18px; margin-bottom: 8px; font-size: 15px;
   border-radius: 50px;
   background: color-mix(in srgb, var(--default-color), transparent 92%);
-  height: 56px;
-  width: 100%;
-  overflow: hidden;
-  transition: 0.3s;
+  height: 56px; width: 100%; overflow: hidden; transition: 0.3s;
 }
-
-.navmenu a i,
-.navmenu a:focus i {
-  font-size: 20px;
-}
-
-.navmenu a span,
-.navmenu a:focus span {
-  padding: 0 5px 0 7px;
-}
-
+.navmenu a i { font-size: 20px; }
+.navmenu a span { padding: 0 5px 0 7px; }
 @media (min-width: 992px) {
-
-  .navmenu a,
-  .navmenu a:focus {
-    max-width: 56px;
-  }
-
-  .navmenu a span,
-  .navmenu a:focus span {
-    display: none;
-  }
+  .navmenu a { max-width: 56px; }
+  .navmenu a span { display: none; }
 }
-
 .navmenu a:hover,
 .navmenu .active,
 .navmenu .active:focus,
@@ -264,572 +114,204 @@ h6 {
   color: var(--contrast-color);
   background: var(--nav-hover-color);
 }
+.navmenu a:hover, .navmenu li:hover>a { max-width: 100%; }
+.navmenu a:hover span, .navmenu li:hover>a span { display: block; }
 
-.navmenu a:hover,
-.navmenu li:hover>a {
-  max-width: 100%;
-  color: var(--contrast-color);
-}
+/* =====================
+   Sections & Titles
+===================== */
+section, .section { color: var(--default-color); background-color: var(--background-color); padding: 60px 0; overflow: clip; }
 
-.navmenu a:hover span,
-.navmenu li:hover>a span {
-  display: block;
-}
-
-/*--------------------------------------------------------------
-# Global Footer
---------------------------------------------------------------*/
-.footer {
-  color: var(--default-color);
-  background-color: var(--background-color);
-  font-size: 14px;
-  text-align: center;
-  padding: 30px 0;
-  position: relative;
-}
-
-.footer h3 {
-  font-size: 36px;
-  font-weight: 700;
-  position: relative;
-  padding: 0;
-  margin: 0 0 15px 0;
-}
-
-.footer p {
-  font-size: 15;
-  font-style: italic;
-  padding: 0;
-  margin: 0 0 30px 0;
-}
-
-.footer .social-links {
-  margin: 0 0 30px 0;
-}
-
-.footer .social-links a {
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--accent-color);
-  color: var(--contrast-color);
-  line-height: 1;
-  margin: 0 4px;
-  border-radius: 50%;
-  text-align: center;
-  width: 36px;
-  height: 36px;
-  transition: 0.3s;
-}
-
-.footer .social-links a:hover {
-  background: color-mix(in srgb, var(--accent-color), transparent 20%);
-  text-decoration: none;
-}
-
-.footer .copyright {
-  padding-top: 25px;
-  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-}
-
-.footer .credits {
-  font-size: 13px;
-  padding-top: 5px;
-}
-
-/*--------------------------------------------------------------
-# Preloader
---------------------------------------------------------------*/
-#preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 999999;
-  overflow: hidden;
-  background: var(--background-color);
-  transition: all 0.6s ease-out;
-}
-
-#preloader:before {
-  content: "";
-  position: fixed;
-  top: calc(50% - 30px);
-  left: calc(50% - 30px);
-  border: 6px solid #ffffff;
-  border-color: var(--accent-color) transparent var(--accent-color) transparent;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: animate-preloader 1.5s linear infinite;
-}
-
-@keyframes animate-preloader {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/*--------------------------------------------------------------
-# Scroll Top Button
---------------------------------------------------------------*/
-.scroll-top {
-  position: fixed;
-  visibility: hidden;
-  opacity: 0;
-  right: 15px;
-  bottom: -15px;
-  z-index: 99999;
-  background-color: var(--accent-color);
-  width: 44px;
-  height: 44px;
-  border-radius: 50px;
-  transition: all 0.4s;
-}
-
-.scroll-top i {
-  font-size: 24px;
-  color: var(--contrast-color);
-  line-height: 0;
-}
-
-.scroll-top:hover {
-  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
-  color: var(--contrast-color);
-}
-
-.scroll-top.active {
-  visibility: visible;
-  opacity: 1;
-  bottom: 15px;
-}
-
-/*--------------------------------------------------------------
-# Disable aos animation delay on mobile devices
---------------------------------------------------------------*/
-@media screen and (max-width: 768px) {
-  [data-aos-delay] {
-    transition-delay: 0 !important;
-  }
-}
-
-/*--------------------------------------------------------------
-# Global Page Titles & Breadcrumbs
---------------------------------------------------------------*/
-.page-title {
-  --background-color: color-mix(in srgb, var(--default-color), transparent 96%);
-  color: var(--default-color);
-  background-color: var(--background-color);
-  padding: 20px 0;
-  position: relative;
-}
-
-.page-title h1 {
-  font-size: 28px;
-  font-weight: 700;
-  margin: 0;
-}
-
-.page-title .breadcrumbs ol {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0 0 10px 0;
-  margin: 0;
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.page-title .breadcrumbs ol li+li {
-  padding-left: 10px;
-}
-
-.page-title .breadcrumbs ol li+li::before {
-  content: "/";
-  display: inline-block;
-  padding-right: 10px;
-  color: color-mix(in srgb, var(--default-color), transparent 70%);
-}
-
-/*--------------------------------------------------------------
-# Global Sections
---------------------------------------------------------------*/
-section,
-.section {
-  color: var(--default-color);
-  background-color: var(--background-color);
-  padding: 60px 0;
-  overflow: clip;
-}
-
-/*--------------------------------------------------------------
-# Global Section Titles
---------------------------------------------------------------*/
-.section-title {
-  text-align: center;
-  padding-bottom: 60px;
-  position: relative;
-}
-
-.section-title h2 {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  position: relative;
-}
-
+.section-title { text-align: center; padding-bottom: 60px; position: relative; }
+.section-title h2 { font-size: 32px; font-weight: 700; margin-bottom: 20px; padding-bottom: 20px; position: relative; }
 .section-title h2:before {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 160px;
-  height: 1px;
+  content: ""; position: absolute; display: block; width: 160px; height: 1px;
   background: color-mix(in srgb, var(--default-color), transparent 60%);
-  left: 0;
-  right: 0;
-  bottom: 1px;
-  margin: auto;
+  left: 0; right: 0; bottom: 1px; margin: auto;
 }
-
 .section-title h2::after {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: var(--accent-color);
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
+  content: ""; position: absolute; display: block; width: 60px; height: 3px;
+  background: var(--accent-color); left: 0; right: 0; bottom: 0; margin: auto;
 }
 
-.section-title p {
-  margin-bottom: 0;
-}
-
-/*--------------------------------------------------------------
-# Hero Section
---------------------------------------------------------------*/
+/* =====================
+   Hero
+===================== */
 .hero {
-  width: 100%;
-  min-height: 100vh;
-  position: relative;
-  padding: 80px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%; min-height: 100vh; position: relative; padding: 80px 0;
+  display: flex; align-items: center; justify-content: center;
 }
-
-.hero img {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-}
-
-.hero:before {
-  content: "";
-  background: color-mix(in srgb, var(--background-color), transparent 30%);
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-}
-
-.hero .container {
-  position: relative;
-  z-index: 3;
-}
-
-.hero h2 {
-  margin: 0;
-  font-size: 64px;
-  font-weight: 700;
-}
-
-.hero p {
-  margin: 5px 0 0 0;
-  font-size: 26px;
-}
-
-.hero p span {
-  letter-spacing: 1px;
-  border-bottom: 2px solid var(--accent-color);
-}
-
-.hero .social-links {
-  margin-top: 25px;
-}
-
-.hero .social-links a {
-  font-size: 20px;
-  display: inline-block;
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
-  line-height: 1;
-  margin-right: 20px;
-  transition: 0.3s;
-}
-
-.hero .social-links a:hover {
-  color: var(--accent-color);
-}
-
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; display: block; }
+.hero:before { content: ""; background: color-mix(in srgb, var(--background-color), transparent 30%); position: absolute; inset: 0; z-index: 2; }
+.hero .container { position: relative; z-index: 3; }
+.hero h2 { margin: 0; font-size: 64px; font-weight: 700; }
+.hero p { margin: 5px 0 0; font-size: 26px; }
+.hero p span { letter-spacing: 1px; border-bottom: 2px solid var(--accent-color); }
+.hero .social-links { margin-top: 25px; }
+.hero .social-links a { font-size: 20px; display: inline-block; color: color-mix(in srgb, var(--default-color), transparent 30%); line-height: 1; margin-right: 20px; transition: 0.3s; }
+.hero .social-links a:hover { color: var(--accent-color); }
 @media (max-width: 768px) {
-  .hero h2 {
-    font-size: 32px;
-  }
-
-  .hero p {
-    font-size: 20px;
-  }
+  .hero h2 { font-size: 32px; }
+  .hero p { font-size: 20px; }
 }
 
-/*--------------------------------------------------------------
-# About Section
---------------------------------------------------------------*/
-.about .content h2 {
-  font-weight: 700;
-  font-size: 24px;
-}
+/* =====================
+   About
+===================== */
+.about .content h2 { font-weight: 700; font-size: 24px; }
+.about .content ul { list-style: none; padding: 0; }
+.about .content ul li { margin-bottom: 20px; display: flex; align-items: center; }
+.about .content ul strong { margin-right: 10px; }
+.about .content ul i { font-size: 16px; margin-right: 5px; color: var(--accent-color); line-height: 0; }
 
-.about .content ul {
-  list-style: none;
-  padding: 0;
-}
+/* =====================
+   Skills
+===================== */
+.skill-logo { max-height: 100px; width: auto; object-fit: contain; margin: 0 auto; padding: 8px; }
 
-.about .content ul li {
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.about .content ul strong {
-  margin-right: 10px;
-}
-
-.about .content ul i {
-  font-size: 16px;
-  margin-right: 5px;
-  color: var(--accent-color);
-  line-height: 0;
-}
-
-
-/*--------------------------------------------------------------
-# Skills Section
---------------------------------------------------------------*/
-
-.skill-logo {
-  max-height: 100px;
-  width: auto;
-  object-fit: contain;
-  margin: 0 auto;
-  padding: 8px;
-}
-
-
-/*--------------------------------------------------------------
-# CV Section
---------------------------------------------------------------*/
-.resume .resume-title {
+/* =====================
+   CV (replaces unused .resume)
+===================== */
+.cv-title {
   color: var(--heading-color);
   font-size: 26px;
   font-weight: 700;
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
-.resume .resume-item {
+.cv-item {
   padding: 0 0 20px 20px;
   margin-top: -2px;
   border-left: 2px solid var(--accent-color);
   position: relative;
 }
-
-.resume .resume-item h4 {
-  line-height: 18px;
-  font-size: 18px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
-  margin-bottom: 10px;
+.cv-item h4 {
+  line-height: 18px; font-size: 18px; font-weight: 600; text-transform: uppercase;
+  color: color-mix(in srgb, var(--default-color), transparent 20%); margin-bottom: 10px;
+}
+.cv-item h5 { font-size: 16px; padding: 5px 15px; display: inline-block; font-weight: 600; margin-bottom: 10px; }
+.cv-item ul { padding-left: 20px; }
+.cv-item ul li { padding-bottom: 10px; }
+.cv-item:last-child { padding-bottom: 0; }
+.cv-item::before {
+  content: ""; position: absolute; width: 16px; height: 16px; border-radius: 50px;
+  left: -9px; top: 0; background: var(--background-color); border: 2px solid var(--accent-color);
 }
 
-.resume .resume-item h5 {
-  font-size: 16px;
-  padding: 5px 15px;
-  display: inline-block;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.resume .resume-item ul {
-  padding-left: 20px;
-}
-
-.resume .resume-item ul li {
-  padding-bottom: 10px;
-}
-
-.resume .resume-item:last-child {
-  padding-bottom: 0;
-}
-
-.resume .resume-item::before {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 50px;
-  left: -9px;
-  top: 0;
-  background: var(--background-color);
-  border: 2px solid var(--accent-color);
-}
-
-/* === Portfolio Section Styles === */
-
+/* =====================
+   Portfolio
+===================== */
 .project-image {
-  max-height: 400px;
-  width: auto;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  display: block;
-  margin: 0 auto;
+  max-height: 400px; width: auto; height: auto;
+  border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: block; margin: 0 auto;
 }
-
-.image-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-/* Overlay */
+.image-wrapper { position: relative; display: inline-block; }
 .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   background-color: rgba(15, 15, 15, 0.85);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  border-radius: 8px;
-  pointer-events: none;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  opacity: 0; transition: opacity 0.4s ease; border-radius: 8px; pointer-events: none;
 }
+.image-wrapper:hover .overlay { opacity: 1; pointer-events: auto; }
+/* Touch support (main.js toggles .active) */
+.overlay.active { opacity: 1; pointer-events: auto; }
+.overlay h4 { color: #fff; font-size: 1rem; font-weight: 500; margin-bottom: .5rem; text-align: center; }
+.overlay i { color: #fff; font-size: 2rem; cursor: pointer; transition: transform .2s ease; }
+.overlay i:hover { transform: scale(1.1); }
 
-.image-wrapper:hover .overlay {
-  opacity: 1;
-  pointer-events: auto;
+.modal-header-custom { background-color: #0563bb !important; }
+.modal-content { border-radius: .75rem !important; overflow: hidden !important; }
+
+#portfolio .container { max-width: 900px; margin: auto; }
+
+.btn-custom { background-color: #0563bb; color: #fff; border: none; }
+.btn-custom:hover { background-color: #093f92; color: #fff; }
+
+/* =====================
+   Contact (PHP Email Form)
+===================== */
+.php-email-form .error-message {
+  display: none; background: #df1529; color: #ffffff; text-align: left;
+  padding: 15px; margin-bottom: 24px; font-weight: 600;
 }
-
-.overlay h4 {
-  color: white;
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  text-align: center;
+.php-email-form .sent-message {
+  display: none; color: #ffffff; background: #059652; text-align: center;
+  padding: 15px; margin-bottom: 24px; font-weight: 600;
 }
-
-
-.overlay i {
-  color: white;
-  font-size: 2rem;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+.php-email-form .loading {
+  display: none; background: var(--surface-color); text-align: center;
+  padding: 15px; margin-bottom: 24px;
 }
-
-.overlay i:hover {
-  transform: scale(1.1);
+.php-email-form .loading:before {
+  content: ""; display: inline-block; border-radius: 50%;
+  width: 24px; height: 24px; margin: 0 10px -6px 0;
+  border: 3px solid var(--accent-color); border-top-color: var(--surface-color);
+  animation: php-email-form-loading 1s linear infinite;
 }
+@keyframes php-email-form-loading { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-.modal-header-custom {
-  background-color: #0563bb !important;
-
-}
-
-.modal-content {
-  border-radius: 0.75rem !important;
-  overflow: hidden !important;
-}
-
-
-
-
-
-
-
-#portfolio .container {
-  max-width: 900px;
-  margin: auto;
-}
-
-.btn-custom {
-  background-color: #0563bb; /* match modal-header-custom background */
-  color: #fff;
-  border: none;
-}
-
-.btn-custom:hover {
-  background-color: #093f92; /* darker on hover */
-  color: #fff;
-}
-
-
-/*--------------------------------------------------------------
-# Contact Section
---------------------------------------------------------------*/
-
-
-.contact .php-email-form {
-  height: 100%;
-}
-
+.contact .php-email-form { height: 100%; }
 .contact .php-email-form input[type=text],
 .contact .php-email-form input[type=email],
 .contact .php-email-form textarea {
-  font-size: 14px;
-  padding: 10px 15px;
-  box-shadow: none;
-  border-radius: 0;
+  font-size: 14px; padding: 10px 15px; box-shadow: none; border-radius: 0;
   color: var(--default-color);
   background-color: color-mix(in srgb, var(--background-color), transparent 50%);
   border-color: color-mix(in srgb, var(--default-color), transparent 80%);
 }
-
 .contact .php-email-form input[type=text]:focus,
 .contact .php-email-form input[type=email]:focus,
-.contact .php-email-form textarea:focus {
-  border-color: var(--accent-color);
-}
-
+.contact .php-email-form textarea:focus { border-color: var(--accent-color); }
 .contact .php-email-form input[type=text]::placeholder,
 .contact .php-email-form input[type=email]::placeholder,
-.contact .php-email-form textarea::placeholder {
-  color: color-mix(in srgb, var(--default-color), transparent 70%);
-}
-
+.contact .php-email-form textarea::placeholder { color: color-mix(in srgb, var(--default-color), transparent 70%); }
 .contact .php-email-form button[type=submit] {
-  color: var(--contrast-color);
-  background: var(--accent-color);
-  border: 0;
-  padding: 10px 30px;
-  transition: 0.4s;
-  border-radius: 50px;
+  color: var(--contrast-color); background: var(--accent-color); border: 0; padding: 10px 30px;
+  transition: .4s; border-radius: 50px;
 }
+.contact .php-email-form button[type=submit]:hover { background: color-mix(in srgb, var(--accent-color), transparent 25%); }
 
-.contact .php-email-form button[type=submit]:hover {
-  background: color-mix(in srgb, var(--accent-color), transparent 25%);
+/* =====================
+   Footer
+===================== */
+.footer {
+  color: var(--default-color); background-color: var(--background-color);
+  font-size: 14px; text-align: center; padding: 30px 0; position: relative;
 }
+.footer h3 { font-size: 36px; font-weight: 700; margin: 0 0 15px 0; }
+.footer p { font-size: 15px; font-style: italic; margin: 0 0 30px 0; }
+.footer .social-links { margin: 0 0 30px 0; }
+.footer .social-links a {
+  font-size: 16px; display: flex; align-items: center; justify-content: center;
+  background: var(--accent-color); color: var(--contrast-color);
+  line-height: 1; margin: 0 4px; border-radius: 50%; width: 36px; height: 36px; transition: 0.3s;
+}
+.footer .social-links a:hover { background: color-mix(in srgb, var(--accent-color), transparent 20%); }
+.footer .copyright { padding-top: 25px; border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%); }
+.footer .credits { font-size: 13px; padding-top: 5px; }
+
+/* =====================
+   Utilities
+===================== */
+#preloader { position: fixed; inset: 0; z-index: 999999; overflow: hidden; background: var(--background-color); transition: all 0.6s ease-out; }
+#preloader:before {
+  content: ""; position: fixed; top: calc(50% - 30px); left: calc(50% - 30px);
+  border: 6px solid #ffffff; border-color: var(--accent-color) transparent var(--accent-color) transparent;
+  border-radius: 50%; width: 60px; height: 60px; animation: animate-preloader 1.5s linear infinite;
+}
+@keyframes animate-preloader { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.scroll-top {
+  position: fixed; visibility: hidden; opacity: 0; right: 15px; bottom: -15px; z-index: 99999;
+  background-color: var(--accent-color); width: 44px; height: 44px; border-radius: 50px; transition: all 0.4s;
+}
+.scroll-top i { font-size: 24px; color: var(--contrast-color); line-height: 0; }
+.scroll-top:hover { background-color: color-mix(in srgb, var(--accent-color), transparent 20%); }
+.scroll-top.active { visibility: visible; opacity: 1; bottom: 15px; }
+
+/* Disable AOS delay on mobile */
+@media screen and (max-width: 768px) { [data-aos-delay] { transition-delay: 0 !important; } }
+
+
 

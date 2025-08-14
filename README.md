@@ -36,6 +36,7 @@ A single-page portfolio to showcase projects, skills, and experience. Built with
 
 ## 📁 Folder Structure
 
+```
 .
 ├── README.md
 ├── assets
@@ -261,7 +262,7 @@ A single-page portfolio to showcase projects, skills, and experience. Built with
         │   └── getDemographics.php
         └── style.css
 
-
+```
 
 ---
 
